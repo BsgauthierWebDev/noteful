@@ -9,21 +9,21 @@ function AddFolderForm() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        const {name} = this.state;
-        console.log('Name: ', name.value);
+        // const {name} = this.state;
+        // console.log('Name: ', folder.value);
         addFolder(e.target.folder.value)
     }
 
     return (
         <>
-        <form className = 'addFolderForm' onSubmit = {e => this.handleSubmit(e)}>
+        <form className = 'addFolderForm' onSubmit = {e => handleSubmit(e)}>
             <h2>Add a new folder</h2>
             <div className = 'addFolderForm__input'>
                 <label htmlFor = 'name'>Name: </label>
                 <input 
                     type = 'text' 
                     className = 'addFolderForm__name'
-                    name = 'name' 
+                    name = 'folder' 
                     id = 'name'
                     placeholder = 'folder name'
                     required />
