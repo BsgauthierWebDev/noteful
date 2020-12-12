@@ -45,7 +45,7 @@ class App extends Component {
     };
 
     addFolder = folderName => {
-		fetch(`${config.API_ENDPOINT}/folder`, {
+		fetch(`${config.API_ENDPOINT}/folders`, {
 			method: 'POST',
 			headers: {
 				Accept: 'application/json',
