@@ -1,0 +1,11 @@
+.folderDropdown {
+    cursor: pointer;
+    margin: 10px;
+    width: 25vw;
+    
+}
+
+.folderOption {
+    margin: 10px;
+    width: 25vw;
+}

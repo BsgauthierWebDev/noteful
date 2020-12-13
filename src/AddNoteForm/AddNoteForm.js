@@ -1,7 +1,14 @@
 import React, {Component} from 'react';
+import NotefulError from '../NotefulError';
+import ValidationError from '../ValidationError';
+import ApiContext from '../ApiContext';
+import config from '../config';
 import './AddNoteForm.css';
+import FolderOptions from '../FolderOptions';
+import moment from 'moment';
 
 class AddNoteForm extends Component {
+    static contextType = ApiContext;
     constructor(props) {
         super(props);
         this.state = {
@@ -9,26 +16,100 @@ class AddNoteForm extends Component {
                 value: " ",
                 touched: false
             },
+            modified: " ",
             content: {
                 value: " ",
                 touched: false
             },
-            folder: {
+            folder_id: {
                 value: " ",
                 touched: false
             }
         };
     }
 
+    updateName(name, modified) {
+        this.setState({name: {value: name, touched: true}});
+        this.updateModified(modified);
+    }
+
+    updateModified(modified) {
+        this.setState({modified: modified});
+    }
+
+    updateContent(content, modified) {
+        this.setState({content: {value: content, touched: true}});
+        this.updateModified(modified);
+    }
+
+    updateFolderId = (folder) => {
+        this.setState({folder_id: {value: folder, touched: true}});
+    }
+
     handleSubmit(event) {
         event.preventDefault();
-        const {name} = this.state;
-        const {content} = this.state;
-        const {folder} = this.state;
+        const note = {
+            name: this.state.name.value,
+            modified: this.state.modified,
+            content: this.state.content.value,
+            folder_id: this.state.folder_id.value
+        }
+        // const url = config.API_ENDPOINT + '/notes';
+        
+        // fetch(url, {
+        //     method: 'POST',
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify(note)
+        // })
+        // .then(res => {
+        //     if (!res.ok) {
+        //         return res.json().then(error => {
+        //             throw error
+        //         })
+        //     }
+        //     return res.json()
+        // })
+        // .then(data => { 
+        //     this.setState({
+        //         name: {value: data.name},   
+        //         modified: data.modified,     
+        //         folder_id: {value: data.folder_id},
+        //         content: {value: data.content},
+        //     })
+            this.context.addNote(note)
+            this.props.history.push('/')
+        // })
+    }
 
-        console.log('Name: ', name.value);
-        console.log('Content: ', content.value);
-        console.log('Folder: ', folder.value);
+    timeStamp() {
+        moment().toDate()
+    }
+
+    validateName() {
+        const name = this.state.name.value.trim();
+        if (name.length === 0) {
+            return 'Name is required';
+        }
+        else if (name.length < 3) {
+            return 'Name must be at least three characters'
+        }
+    }
+
+    validateContent() {
+        const content = this.state.content.value.trim();
+        if (content.length === 0) {
+            return 'Content is required for note creation'
+        }
+    }
+
+    validateFolderId() {
+        const folderOption = this.state.folder_id.value;
+        if (folderOption === null) {
+            return 'Picking a folder is required'
+        }
     }
 
     handleClickCancel = () => {
@@ -36,33 +117,49 @@ class AddNoteForm extends Component {
     };
 
     render() {
+        const nameError = this.validateName();
+        const contentError = this.validateContent();
+        const folder_idError = this.validateFolderId();
+        const modified = moment().toDate();
+
         return (
+            <>
             <form className = 'addNoteForm' onSubmit = {e => this.handleSubmit(e)}>
+                <NotefulError>
                 <h2>Add a new note</h2>
-                <div className = 'addNoteForm__input'>
-                    <label htmlFor = 'name'>Name: </label>
-                    <input type = 'text' className = 'addNoteForm__name'
-                    name = 'name' id = 'name' />
-                </div>
-                <div className = 'addNoteForm__input'>
-                    <label htmlFor = 'name'>Content: </label>
-                    <input type = 'text' className = 'content'
-                    name = 'name' id = 'name' />
-                </div>
-                <div className = 'addNoteForm__input'>
-                    <label htmlFor = 'name'>Folder: </label>
-                    <input type = 'text' className = 'folder'
-                    name = 'name' id = 'name' />
-                </div>
-                <div className = 'addNoteForm__buttons'>
-                    <button type = 'button' className = 'addNoteForm__button'onClick = {this.handleClickCancel}>
-                        Cancel
-                    </button>
-                    <button type = 'submit' className = 'addNoteForm__button'>
-                        Save
-                    </button>
-                </div>
+                <div className = 'addNoteForm__input'>* fields are required</div>
+                <label htmlFor = 'nameInput'>Name: </label>
+                <input 
+                    type = 'text' 
+                    className = 'addNoteForm__name'
+                    name = 'name' 
+                    id = 'name'
+                    onChange = {e => this.updateName(e.target.value, modified)} />
+                    {this.state.name.touched && (
+                        <ValidationError message = {nameError} />
+                    )}
+                <label htmlFor = 'contentInput'>Content: </label>
+                <input 
+                    type = 'text' 
+                    className = 'addNoteForm__content'
+                    name = 'content' 
+                    id = 'noteContent'
+                    onChange = {e => this.updateContent(e.target.value, modified)} />
+                    {this.state.name.touched && (
+                        <ValidationError message = {contentError}/>
+                    )}
+                <label htmlFor = 'folderInput'>Choose a Folder: </label>
+                <FolderOptions
+                    updateFolderId = {this.updateFolderId}/>
+                    {this.state.folder_id.touched && (
+                        <ValidationError folder_idError = {folder_idError}/>
+                    )}
+                <button type = 'submit' className = 'addNoteForm__button'>
+                    Save
+                </button>
+                </NotefulError>
             </form>
+            </>
         )
     }
 }

@@ -63,7 +63,28 @@ class App extends Component {
 			.catch(err => {
 				console.log(err)
 			})
-	}
+    }
+    
+    addNote = noteName => {
+        fetch(`${config.API_ENDPOINT}/notes`, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({name: noteName})
+        })
+            .then(res => res.json())
+            .then(resJSON => {
+                const newNotes = [...this.state.notes, resJSON]
+                this.setState({notes: newNotes})
+
+                this.props.history.push('/')
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
 
     renderNavRoutes() {
         return (
