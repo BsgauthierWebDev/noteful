@@ -25,35 +25,8 @@ class AddFolderForm extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const folder = {
-            id: this.state.id,
-            name: this.state.name.value
-        }
-        const url = config.API_ENDPOINT + '/folders';
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(folder)
-        })
-        .then(res => {
-            if (!res.ok) {
-                return res.json().then(error => {
-                    throw error
-                })
-            }
-            return res.json()
-        })
-        .then(data => {
-            this.setState({
-                name: {value: data.name},
-                id: data.id
-            })
-            this.context.addFolder(data);
-            this.props.history.push('/')
-        })
+        this.context.addFolder(this.state.name.value);
+        this.props.history.push('/');
     }
 
     validateName() {
