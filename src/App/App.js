@@ -7,8 +7,8 @@ import NoteListMain from '../NoteListMain/NoteListMain';
 import NotePageMain from '../NotePageMain/NotePageMain';
 import ApiContext from '../ApiContext';
 import config from '../config';
-import AddFolderForm from '../AddFolderForm/AddFolderForm';
-import AddNoteForm from '../AddNoteForm/AddNoteForm';
+import AddFolder from '../AddFolder/AddFolder';
+import AddNote from '../AddNote/AddNote';
 import './App.css';
 
 class App extends Component {
@@ -104,8 +104,8 @@ class App extends Component {
                     />
                 ))}
                 <Route path="/note/:noteId" component={NotePageNav} />
-                <Route path="/add-folder" component={AddFolderForm} />
-                <Route path="/add-note" component={AddNoteForm} />
+                <Route path="/add-folder" component={AddFolder} />
+                <Route path="/add-note" component={AddNote} />
             </>
         );
     }
