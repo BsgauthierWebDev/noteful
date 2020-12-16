@@ -9,6 +9,7 @@ import ApiContext from '../ApiContext';
 import config from '../config';
 import AddFolder from '../AddFolder/AddFolder';
 import AddNote from '../AddNote/AddNote';
+import PropTypes from 'prop-types';
 import './App.css';
 
 class App extends Component {
@@ -39,9 +40,13 @@ class App extends Component {
     }
 
     handleDeleteNote = noteId => {
-        this.setState({
-            notes: this.state.notes.filter(note => note.id !== noteId)
+        const newNotes = this.state.notes.filter(note => {
+            return note.id !== noteId;
         });
+
+        this.setState({
+            notes: newNotes
+        })
     };
 
     addFolder = folderName => {
@@ -143,6 +148,21 @@ class App extends Component {
             </ApiContext.Provider>
         );
     }
+}
+
+App.defaultProps = {
+    folders: [],
+    content: "",
+    name: "",
+    error: null
+  }
+  
+App.propTypes = {
+folders: PropTypes.array,
+name: PropTypes.string.isRequired,
+id: PropTypes.string,
+content: PropTypes.string.isRequired,
+modified: PropTypes.string
 }
 
 export default App;

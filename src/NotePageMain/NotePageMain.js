@@ -2,6 +2,7 @@ import React from 'react'
 import Note from '../Note/Note'
 import ApiContext from '../ApiContext'
 import { findNote } from '../notes-helpers'
+import PropTypes from 'prop-types'
 import './NotePageMain.css'
 
 export default class NotePageMain extends React.Component {
@@ -36,4 +37,19 @@ export default class NotePageMain extends React.Component {
       </section>
     )
   }
+}
+
+NotePageMain.defaultProps = {
+  folders: [],
+  content: "",
+  name: "",
+  error: null
+}
+
+NotePageMain.propTypes = {
+  folders: PropTypes.array,
+  name: PropTypes.string.isRequired,
+  id: PropTypes.string,
+  content: PropTypes.string.isRequired,
+  modified: PropTypes.string
 }

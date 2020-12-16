@@ -52,7 +52,8 @@ class AddFolder extends Component {
                             className = 'newFolder__input'
                             name = 'name'
                             id = 'name'
-                            onChange = {e => this.updateName(e.target.value)} />
+                            onChange = {e => this.updateName(e.target.value)}
+                            required />
                         {this.state.name.touched && (
                             <ValidationError message = {nameError} />
                         )}
@@ -64,12 +65,7 @@ class AddFolder extends Component {
                         </button>
                     </NotefulError>
                 </form>
-                    {/* <div className = 'addFolder__cancel'>
-                       <button type = 'button' className = 'addFolder__button' onClick = {() => history.goBack()}>
-                            Cancel
-                        </button> 
-                    </div> */}
-                </>
+            </>
         )
     }
 }

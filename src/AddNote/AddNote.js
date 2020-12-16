@@ -109,7 +109,8 @@ class AddNote extends Component {
                         className = 'addNote__name'
                         name = 'name' 
                         id = 'name'
-                        onChange = {e => this.updateName(e.target.value, modified)} />
+                        onChange = {e => this.updateName(e.target.value, modified)}
+                        required />
                         {this.state.name.touched && (
                             <ValidationError message = {nameError} />
                         )}
@@ -121,7 +122,8 @@ class AddNote extends Component {
                         className = 'addNote__content'
                         name = 'content' 
                         id = 'noteContent'
-                        onChange = {e => this.updateContent(e.target.value, modified)} />
+                        onChange = {e => this.updateContent(e.target.value, modified)}
+                        required />
                         {this.state.name.touched && (
                             <ValidationError message = {contentError}/>
                         )}
