@@ -10,7 +10,9 @@ class FolderOptions extends React.Component {
         return (
             <select
                 className = 'folderDropdown'
-                onChange = {e => this.props.updateFolderId(e.target.value)}>
+                onChange = {e => this.props.updateFolderId(e.target.value)}
+                required>
+                    <option value = "" >Select a Folder</option>
                     {folders.map(folder =>
                         <option
                             key = {folder.id}

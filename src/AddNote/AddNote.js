@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import NotefulError from '../NotefulError';
 import ValidationError from '../ValidationError';
 import ApiContext from '../ApiContext';
-import config from '../config';
 import './AddNote.css';
 import FolderOptions from '../FolderOptions';
 import moment from 'moment';
@@ -55,34 +54,8 @@ class AddNote extends Component {
             content: this.state.content.value,
             folderId: this.state.folderId.value
         }
-        const url = config.API_ENDPOINT + '/notes';
-        
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(note)
-        })
-        .then(res => {
-            if (!res.ok) {
-                return res.json().then(error => {
-                    throw error
-                })
-            }
-            return res.json()
-        })
-        .then(data => { 
-            this.setState({
-                name: {value: data.name},   
-                modified: data.modified,     
-                folderId: {value: data.folderId},
-                content: {value: data.content},
-            })
             this.context.addNote(note)
             this.props.history.push('/')
-        })
     }
 
     timeStamp() {

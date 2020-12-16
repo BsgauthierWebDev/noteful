@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import NotefulError from '../NotefulError';
-import config from '../config';
 import ValidationError from '../ValidationError';
 import PropTypes from 'prop-types';
 import './AddFolder.css';
