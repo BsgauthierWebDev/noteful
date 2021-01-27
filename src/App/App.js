@@ -50,7 +50,7 @@ class App extends Component {
     };
 
     addFolder = folderName => {
-		fetch(`${config.API_ENDPOINT}/folders`, {
+		fetch(`${config.API_ENDPOINT}/api/folders`, {
 			method: 'POST',
 			headers: {
 				Accept: 'application/json',
@@ -71,7 +71,7 @@ class App extends Component {
     }
     
     addNote = noteData => {
-        fetch(`${config.API_ENDPOINT}/notes`, {
+        fetch(`${config.API_ENDPOINT}/api/notes`, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',
