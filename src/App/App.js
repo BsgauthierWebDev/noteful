@@ -20,8 +20,8 @@ class App extends Component {
 
     componentDidMount() {
         Promise.all([
-            fetch(`${config.API_ENDPOINT}/notes`),
-            fetch(`${config.API_ENDPOINT}/folders`)
+            fetch(`${config.API_ENDPOINT}/api/notes`),
+            fetch(`${config.API_ENDPOINT}/api/folders`)
         ])
             .then(([notesRes, foldersRes]) => {
                 if (!notesRes.ok)
@@ -94,7 +94,7 @@ class App extends Component {
     renderNavRoutes() {
         return (
             <>
-                {['/', '/folder/:folderId'].map(path => (
+                {['/', '/api/folder/:folderId'].map(path => (
                     <Route
                         exact
                         key={path}
@@ -112,7 +112,7 @@ class App extends Component {
     renderMainRoutes() {
         return (
             <>
-                {['/', '/folder/:folderId'].map(path => (
+                {['/', '/api/folder/:folderId'].map(path => (
                     <Route
                         exact
                         key={path}

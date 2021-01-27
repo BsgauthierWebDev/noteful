@@ -54,34 +54,8 @@ class AddNoteForm extends Component {
             content: this.state.content.value,
             folder_id: this.state.folder_id.value
         }
-        // const url = config.API_ENDPOINT + '/notes';
-        
-        // fetch(url, {
-        //     method: 'POST',
-        //     headers: {
-        //         'Accept': 'application/json',
-        //         'Content-Type': 'application/json'
-        //     },
-        //     body: JSON.stringify(note)
-        // })
-        // .then(res => {
-        //     if (!res.ok) {
-        //         return res.json().then(error => {
-        //             throw error
-        //         })
-        //     }
-        //     return res.json()
-        // })
-        // .then(data => { 
-        //     this.setState({
-        //         name: {value: data.name},   
-        //         modified: data.modified,     
-        //         folder_id: {value: data.folder_id},
-        //         content: {value: data.content},
-        //     })
             this.context.addNote(note)
             this.props.history.push('/')
-        // })
     }
 
     timeStamp() {
