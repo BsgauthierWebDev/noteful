@@ -84,7 +84,7 @@ class App extends Component {
                 const newNotes = [...this.state.notes, resJSON]
                 this.setState({notes: newNotes})
 
-                // this.props.history.push('/')
+                this.props.history.push('/')
             })
             .catch(err => {
                 console.log(err)
