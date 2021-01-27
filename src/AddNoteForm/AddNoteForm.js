@@ -21,7 +21,7 @@ class AddNoteForm extends Component {
                 value: " ",
                 touched: false
             },
-            folder_id: {
+            folderId: {
                 value: " ",
                 touched: false
             }
@@ -43,7 +43,7 @@ class AddNoteForm extends Component {
     }
 
     updateFolderId = (folder) => {
-        this.setState({folder_id: {value: folder, touched: true}});
+        this.setState({folderId: {value: folder, touched: true}});
     }
 
     handleSubmit(event) {
@@ -52,7 +52,7 @@ class AddNoteForm extends Component {
             name: this.state.name.value,
             modified: this.state.modified,
             content: this.state.content.value,
-            folder_id: this.state.folder_id.value
+            folderId: this.state.folderId.value
         }
             this.context.addNote(note)
             this.props.history.push('/')
@@ -80,7 +80,7 @@ class AddNoteForm extends Component {
     }
 
     validateFolderId() {
-        const folderOption = this.state.folder_id.value;
+        const folderOption = this.state.folderId.value;
         if (folderOption === null) {
             return 'Picking a folder is required'
         }
@@ -93,7 +93,7 @@ class AddNoteForm extends Component {
     render() {
         const nameError = this.validateName();
         const contentError = this.validateContent();
-        const folder_idError = this.validateFolderId();
+        const folderIdError = this.validateFolderId();
         const modified = moment().toDate();
 
         return (
@@ -125,8 +125,8 @@ class AddNoteForm extends Component {
                 <label htmlFor = 'folderInput'>Choose a Folder: </label>
                 <FolderOptions
                     updateFolderId = {this.updateFolderId}/>
-                    {this.state.folder_id.touched && (
-                        <ValidationError folder_idError = {folder_idError}/>
+                    {this.state.folderId.touched && (
+                        <ValidationError folderIdError = {folderIdError}/>
                     )}
                 <button type = 'submit' className = 'addNoteForm__button'>
                     Save
