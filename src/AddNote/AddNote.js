@@ -21,7 +21,7 @@ class AddNote extends Component {
                 value: " ",
                 touched: false
             },
-            folder_id: {
+            folderId: {
                 value: " ",
                 touched: false
             }
@@ -43,7 +43,7 @@ class AddNote extends Component {
     }
 
     updateFolderId = (folder) => {
-        this.setState({folder_id: {value: folder, touched: true}});
+        this.setState({folderId: {value: folder, touched: true}});
     }
 
     handleSubmit(event) {

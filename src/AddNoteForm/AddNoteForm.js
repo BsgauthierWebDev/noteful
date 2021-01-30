@@ -42,8 +42,8 @@ class AddNoteForm extends Component {
         this.updateModified(modified);
     }
 
-    updateFolderId = (folder) => {
-        this.setState({folderId: {value: folder, touched: true}});
+    updateFolderId = (folderId) => {
+        this.setState({folderId: {value: folderId, touched: true}});
     }
 
     handleSubmit(event) {

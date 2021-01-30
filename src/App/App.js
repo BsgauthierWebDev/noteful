@@ -81,8 +81,11 @@ class App extends Component {
         })
             .then(res => res.json())
             .then(resJSON => {
+                console.log(resJSON)
                 const newNotes = [...this.state.notes, resJSON]
+                console.log(newNotes)
                 this.setState({notes: newNotes})
+                console.log(this.state)
 
                 this.props.history.push('/')
             })
@@ -94,7 +97,7 @@ class App extends Component {
     renderNavRoutes() {
         return (
             <>
-                {['/', '/api/folder/:folderId'].map(path => (
+                {['/', '/api/folders/:id'].map(path => (
                     <Route
                         exact
                         key={path}
@@ -102,9 +105,9 @@ class App extends Component {
                         component={NoteListNav}
                     />
                 ))}
-                <Route path="/note/:noteId" component={NotePageNav} />
-                <Route path="/add-folder" component={AddFolder} />
-                <Route path="/add-note" component={AddNote} />
+                <Route path="/api/notes/:noteId" component={NotePageNav} />
+                <Route path="/api/add-folder" component={AddFolder} />
+                <Route path="/api/add-note" component={AddNote} />
             </>
         );
     }
@@ -112,7 +115,7 @@ class App extends Component {
     renderMainRoutes() {
         return (
             <>
-                {['/', '/api/folder/:folderId'].map(path => (
+                {['/', '/api/folders/:folderId'].map(path => (
                     <Route
                         exact
                         key={path}
@@ -120,7 +123,7 @@ class App extends Component {
                         component={NoteListMain}
                     />
                 ))}
-                <Route path="/note/:noteId" component={NotePageMain} />
+                <Route path="/api/notes/:noteId" component={NotePageMain} />
             </>
         );
     }
