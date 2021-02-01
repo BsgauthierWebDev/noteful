@@ -56,12 +56,15 @@ class App extends Component {
 				Accept: 'application/json',
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ name: folderName })
+			body: JSON.stringify(folderName)
 		})
 			.then(res => res.json())
 			.then(resJSON => {
-				const newFolders = [...this.state.folders, resJSON]
-				this.setState({ folders: newFolders })
+                console.log(resJSON)
+                const newFolders = [...this.state.folders, resJSON]
+                console.log(newFolders)
+                this.setState({ folders: newFolders })
+                console.log(this.state)
 
 				this.props.history.push('/')
 			})
