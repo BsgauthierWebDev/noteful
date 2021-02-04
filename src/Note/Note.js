@@ -10,12 +10,16 @@ import PropTypes from 'prop-types';
 export default class Note extends React.Component {
   static defaultProps ={
     onDeleteNote: () => {},
+    history: {
+      push: () => {}
+    },
   }
   static contextType = ApiContext;
 
-  handleClickDelete = e => {
+  handleClickDelete = (e) => {
     e.preventDefault()
     const noteId = this.props.id
+    console.log(noteId)
 
     fetch(`${config.API_ENDPOINT}/api/notes/${noteId}`, {
       method: 'DELETE',
@@ -29,7 +33,9 @@ export default class Note extends React.Component {
         return res.json()
       })
       .then(() => {
+        console.log('This is working')
         this.context.deleteNote(noteId)
+        this.props.history.push('/')
       })
       .catch(error => {
         console.error({ error })

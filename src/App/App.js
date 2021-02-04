@@ -40,13 +40,10 @@ class App extends Component {
     }
 
     handleDeleteNote = noteId => {
-        const newNotes = this.state.notes.filter(note => {
-            return note.id !== noteId;
-        });
-
         this.setState({
-            notes: newNotes
-        })
+            notes: this.state.notes.filter(note => note.id !== noteId)
+        });
+        console.log(this.state.notes)
     };
 
     addFolder = folderName => {
@@ -56,7 +53,7 @@ class App extends Component {
 				Accept: 'application/json',
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(folderName)
+			body: JSON.stringify({ name: folderName })
 		})
 			.then(res => res.json())
 			.then(resJSON => {

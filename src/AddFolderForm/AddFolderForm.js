@@ -14,8 +14,7 @@ class AddFolderForm extends Component {
             name: {
                 value: "",
                 touched: false
-            },
-            id: "",
+            }
         };
     }
 

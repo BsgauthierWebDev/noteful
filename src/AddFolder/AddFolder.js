@@ -14,7 +14,6 @@ class AddFolder extends Component {
                 value: "",
                 touched: false
             },
-            folderId: "",
         };
     }
 
