@@ -27,15 +27,10 @@ export default class Note extends React.Component {
         'content-type': 'application/json'
       },
     })
-      .then(res => {
-        if (!res.ok)
-          return res.json().then(e => Promise.reject(e))
-        return res.json()
-      })
       .then(() => {
-        console.log('This is working')
-        this.context.deleteNote(noteId)
+        console.log('Deleting the note')
         this.props.history.push('/')
+        this.context.deleteNote(noteId)
       })
       .catch(error => {
         console.error({ error })
